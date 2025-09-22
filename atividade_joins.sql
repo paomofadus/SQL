@@ -26,3 +26,12 @@ WHERE categoria = "Computador"
 GROUP BY c.nome_cliente
 HAVING SUM(p.preco_unit * v.qtd_produto) >= 3000
 ;
+
+SELECT c.id_cliente, c.nome_cliente, c.cidade, SUM(p.preco_unit * v.qtd_produto) AS gasto_total, COUNT(v.id_cliente) AS num_pedidos
+FROM clientes AS c
+LEFT JOIN vendas AS v
+ON c.id_cliente = v.id_cliente
+LEFT JOIN produtos AS p
+ON v.id_produto = p.id_produto
+GROUP BY c.id_cliente
+;
